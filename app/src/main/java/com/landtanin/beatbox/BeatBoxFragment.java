@@ -45,6 +45,11 @@ public class BeatBoxFragment extends Fragment {
 
     }
 
+    /**
+     *
+     * This is where we hook up viewModel with Binding class
+     *
+     */
     private class SoundHolder extends RecyclerView.ViewHolder{
 
         private ListItemSoundBinding mBinding;
@@ -55,16 +60,31 @@ public class BeatBoxFragment extends Fragment {
 
             mBinding = binding;
 
+            // construct and attach viewModel
+            mBinding.setViewmModel(new SoundViewModel(mBeatBox));
+
+        }
+
+        // update the data that view model is working with
+        public void bind(Sound sound){
+
+            // view model has one setter
+            mBinding.getViewmModel().setmSound(sound);
+
+            // executePendingBindings force method to update itself immediately
+            // to live up to the speed of RecyclerView updating rate
+            mBinding.executePendingBindings();
+
         }
 
     }
 
     private class SoundAdapter extends RecyclerView.Adapter<SoundHolder> {
 
-        private List<Sound> mSounds;
+        private List<Sound> mSoundsArrayList;
 
         public SoundAdapter(List<Sound> sounds){
-            mSounds = sounds;
+            mSoundsArrayList = sounds;
         }
 
         @Override
@@ -77,11 +97,14 @@ public class BeatBoxFragment extends Fragment {
         @Override
         public void onBindViewHolder(SoundHolder holder, int position) {
 
+            Sound sound = mSoundsArrayList.get(position);
+            holder.bind(sound);
+
         }
 
         @Override
         public int getItemCount() {
-            return mSounds.size();
+            return mSoundsArrayList.size();
         }
     }
 
