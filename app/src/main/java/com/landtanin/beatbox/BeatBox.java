@@ -49,6 +49,12 @@ public class BeatBox {
 
     }
 
+    public void release() {
+
+        mSoundPool.release();
+
+    }
+
     private void loadSounds() {
 
         String[] soundNames;
