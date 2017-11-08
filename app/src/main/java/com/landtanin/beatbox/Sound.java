@@ -8,6 +8,9 @@ public class Sound {
 
     private String mAssetPath;
     private String mName;
+    private Integer mSoundId;
+    // Using Integer instead of an int allow us to say that a Sound.java
+    // has no value set for mSoundId by assigning it a null value
 
     public Sound(String assetPath) {
         mAssetPath = assetPath;
@@ -22,5 +25,13 @@ public class Sound {
 
     public String getmName() {
         return mName;
+    }
+
+    public Integer getmSoundId() {
+        return mSoundId;
+    }
+
+    public void setmSoundId(Integer mSoundId) {
+        this.mSoundId = mSoundId;
     }
 }
